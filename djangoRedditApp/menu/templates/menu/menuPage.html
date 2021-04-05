@@ -1,0 +1,41 @@
+{% extends 'menu/base.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="pt-3 pb-4">
+            <form action="{% url 'menu-search-reddit' %}" method="post">
+              {% csrf_token %}
+              <div class="input-group">
+                <input type="text" id="subreddit_name" name="subreddit_name" class="form-control" value="Search...">
+                <div class="input-group-append">
+                    <button type="submit" class="btn waves-effect waves-light btn-custom"><i class="fa fa-search mr-1"></i>Search</button>
+                </div>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row">
+          {% for post in posts %}
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src="{{ post.image_url }}">
+                <div class="card-body">
+                  <p class="card-text">{{ post.title }}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="{{ post.url }}" class="btn btn-sm btn-outline-secondary"><b>View</b></a>
+                      <a class="btn btn-sm btn-outline-secondary"><b>Score:</b> {{ post.score }}</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+          </div>
+        </div>
+      </div>
+{% endblock content %}
