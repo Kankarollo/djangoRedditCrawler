@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from praw.reddit import Subreddit
 from utils.reddit_crawler import RedditCrawler
 from .forms import SearchForm
 from .models import RedditSubreddit
@@ -6,6 +7,7 @@ from .models import RedditSubreddit
 def home(request):
     posts = []
     subreddit = RedditSubreddit.objects.first()
+    print(f"subreddit = {subreddit}")
     if subreddit is None:
         for index in range(1,4):
             posts.append({"author": f"author {index}", "title": f"Lorem Ipsum part {index}", "score":f"date{index}", "url":"None"})
